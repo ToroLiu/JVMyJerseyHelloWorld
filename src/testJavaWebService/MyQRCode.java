@@ -43,8 +43,5 @@ public class MyQRCode {
 		};
 		
 		return Response.ok(stream).build();
-				
 	}
-	
-	
 }

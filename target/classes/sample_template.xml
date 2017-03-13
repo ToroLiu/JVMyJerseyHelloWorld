@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsl:stylesheet version="1.0" xmlns:fo="http://www.w3.org/1999/XSL/Format"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="doc">
+<fo:root xml:lang="en"
+	xmlns:fo="http://www.w3.org/1999/XSL/Format" 
+	>
+
+<fo:layout-master-set>
+	<fo:simple-page-master master-name="A4-portrait" page-height="297mm" page-width="210mm" margin-top="2cm" margin-bottom="2cm" margin-left="1.5cm" margin-right="1.5cm">
+		<fo:region-body margin-top="1cm" />
+	    <fo:region-before extent="1cm" />
+	    <fo:region-after extent="1.5cm" />
+	</fo:simple-page-master>
+</fo:layout-master-set>
+
+<fo:page-sequence master-reference="A4-portrait">
+    <fo:static-content flow-name="xsl-region-after">
+        <fo:block text-align-last="center" font-size="10pt">
+            <fo:page-number />
+        </fo:block>
+    </fo:static-content>
+    
+	<fo:flow flow-name="xsl-region-body">
+	    <fo:block>
+	        <xsl:apply-templates select="qrcode" />
+    	</fo:block>
+	</fo:flow>
+</fo:page-sequence>
+</fo:root>
+</xsl:template>
+
+<xsl:template match="qrcode">
+    <fo:block>
+   		<fo:external-graphic
+	   	    src="{src}" 
+	       	border-style="none" 
+	       	border-width="thin"
+	       	width="17cm"
+	       	height="8cm"
+	       	content-width="5cm"
+	       	content-height="5cm"
+	       	scaling="uniform" 
+	       	display-align="center" 
+	       	text-align="center">
+   		</fo:external-graphic>
+   	</fo:block>
+</xsl:template>
+
+</xsl:stylesheet>
